@@ -7,7 +7,19 @@ import PySimpleGUI as sg
 sg.theme('DarkBlue17')
 
 # Variáveis
-checado = True
+arquivo = 'log.txt'
+
+# Verificação e criação de arquivo
+if not os.path.exists(arquivo):
+    with open(arquivo, 'w') as f:
+        f.write('')
+
+# Mudança de variável
+with open(arquivo, 'r') as r:
+    if r.readline() == 'Ativado':
+        checado = True
+    else:
+        checado = False
 
 
 # Funções de sistema
@@ -46,7 +58,8 @@ def principal():  # janela de apresentação
         [sg.Text('Sair do Windows', font='verdana 20', text_color='white')],
         [sg.Text('Em quantos minutos deseja desligar o Pc?', key='subtitulo')],
         [sg.Input(key='min')],
-        [sg.Button('Iniciar')]
+        [sg.Button('Iniciar')],
+        [sg.Button('Cancelar')]
     ]
     return sg.Window('Sair do Windows', layout=layout, finalize=True, return_keyboard_events=True)
 
@@ -69,16 +82,18 @@ while True:
     window, event, values = sg.read_all_windows()
 
     # Fechamento da janela e do aplicativo
-    if window == janela1 and event == sg.WIN_CLOSED or window == janela2 and event == 'Até mais!' or window == janela2 and event == "\r":
+    if window == janela2 and event == sg.WIN_CLOSED or window == janela1 and event == sg.WIN_CLOSED or window == janela1 and event == 'Cancelar':
+        break
+    if window == janela2 and event == 'Até mais!' or window == janela2 and event == "\r":
         if window == janela2 and values['check'] == True:
             bloquear()
-            ativado = True
+            with open(arquivo, 'w') as f:
+                f.write('Ativado')
         else:
-            ativado = False
+            with open(arquivo, 'w') as f:
+                f.write('Desativado')
         break
-    if window == janela2 and event == sg.WIN_CLOSED:
-        break
-        
+
     # Execução da ação principal
     if window == janela1 and event == 'Iniciar' or window == janela1 and event == "\r":
         minuto = values['min']
