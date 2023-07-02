@@ -64,6 +64,15 @@ def principal():  # janela de apresentação
     return sg.Window('Sair do Windows', layout=layout, finalize=True, return_keyboard_events=True)
 
 
+def erro():  # janela de erro de imput
+    layout = [
+        [sg.Text('ERRO!', font='verdana 20', text_color='red')],
+        [sg.Text('',key='tipo')],
+        [sg.Button('Ok')]
+    ]
+    return sg.Window('Deu Algo errado', layout=layout, finalize=True, return_keyboard_events=True)
+
+
 def sucesso(num):  # janela de encerramento
     layout = [
         [sg.Text('Sucesso!!!', font='verdana 20', text_color='green')],
@@ -76,16 +85,16 @@ def sucesso(num):  # janela de encerramento
 
 
 # Loop Principal
-janela1, janela2 = principal(), None
+janela_main = janela_erro = janela_sucesso = principal(), None
 
 while True:
     window, event, values = sg.read_all_windows()
 
     # Fechamento da janela e do aplicativo
-    if window == janela2 and event == sg.WIN_CLOSED or window == janela1 and event == sg.WIN_CLOSED or window == janela1 and event == 'Cancelar':
+    if window == janela_sucesso and event == sg.WIN_CLOSED or window == janela_main and event == sg.WIN_CLOSED or window == janela_main and event == 'Cancelar':
         break
-    if window == janela2 and event == 'Até mais!' or window == janela2 and event == "\r":
-        if window == janela2 and values['check'] == True:
+    if window == janela_sucesso and event == 'Até mais!' or window == janela_sucesso and event == "\r":
+        if window == janela_sucesso and values['check'] == True:
             bloquear()
             with open(arquivo, 'w') as f:
                 f.write('Ativado')
@@ -95,25 +104,25 @@ while True:
         break
 
     # Execução da ação principal
-    if window == janela1 and event == 'Iniciar' or window == janela1 and event == "\r":
+    if window == janela_main and event == 'Iniciar' or window == janela_main and event == "\r":
         minuto = values['min']
         if minuto.isnumeric():
             sair(minuto)
-            janela2 = sucesso(minuto)
-            janela1.hide()
+            janela_sucesso = sucesso(minuto)
+            janela_main.hide()
 
         # Verificação de erro
         elif minuto == '':
             sg.popup('Erro!', 'Preencha o campo com números. Tente Novamente!')
         else:
             sg.popup('Erro!', 'Utilize apenas números. Tente Novamente!')
-            janela1['min'].update('')
+            janela_main['min'].update('')
 
     # Conclusão e tela final
-    if window == janela2 and event == 'Cancelar':
+    if window == janela_sucesso and event == 'Cancelar':
         cancelar()
-        janela2.hide()
-        janela1.un_hide()
-        janela1['min'].update('')
+        janela_sucesso.hide()
+        janela_main.un_hide()
+        janela_main['min'].update('')
 
 window.close()
