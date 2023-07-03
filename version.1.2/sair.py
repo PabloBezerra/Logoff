@@ -3,24 +3,6 @@ import os
 import PySimpleGUI as sg
 # from time import sleep #
 
-# Tema
-sg.theme('DarkBlue17')
-
-# Variáveis
-arquivo = 'log.txt'
-
-# Verificação e criação de arquivo
-if not os.path.exists(arquivo):
-    with open(arquivo, 'w') as f:
-        f.write('')
-
-# Mudança de variável
-with open(arquivo, 'r') as r:
-    if r.readline() == 'Ativado':
-        checado = True
-    else:
-        checado = False
-
 
 # Funções de sistema
 def sair(num):  # comando de encerramento do windows
@@ -67,7 +49,7 @@ def principal():  # janela de apresentação
 def erro():  # janela de erro de imput
     layout = [
         [sg.Text('ERRO!', font='verdana 20', text_color='red')],
-        [sg.Text('',key='tipo')],
+        [sg.Text('', key='tipo')],
         [sg.Button('Ok')]
     ]
     return sg.Window('Deu Algo errado', layout=layout, finalize=True, return_keyboard_events=True)
@@ -84,9 +66,29 @@ def sucesso(num):  # janela de encerramento
     return sg.Window('Sucesso!!!', layout=layout, finalize=True, return_keyboard_events=True)
 
 
-# Loop Principal
-janela_main = janela_erro = janela_sucesso = principal(), None
+# Tema
+sg.theme('DarkBlue17')
 
+# Variáveis
+arquivo = 'log.txt'
+janela_main = principal()
+janela_erro = None
+janela_sucesso = None
+
+# Verificação e criação de arquivo
+if not os.path.exists(arquivo):
+    with open(arquivo, 'w') as f:
+        f.write('')
+
+# Mudança de variável
+with open(arquivo, 'r') as r:
+    if r.readline() == 'Ativado':
+        checado = True
+    else:
+        checado = False
+
+
+# Loop Principal
 while True:
     window, event, values = sg.read_all_windows()
 
@@ -106,17 +108,22 @@ while True:
     # Execução da ação principal
     if window == janela_main and event == 'Iniciar' or window == janela_main and event == "\r":
         minuto = values['min']
+
+        # Se correto
         if minuto.isnumeric():
             sair(minuto)
             janela_sucesso = sucesso(minuto)
             janela_main.hide()
 
         # Verificação de erro
-        elif minuto == '':
-            sg.popup('Erro!', 'Preencha o campo com números. Tente Novamente!')
         else:
-            sg.popup('Erro!', 'Utilize apenas números. Tente Novamente!')
-            janela_main['min'].update('')
+            janela_erro = erro()
+            janela_main.hide
+            if minuto == '':
+                janela_erro['tipo'].update('Preencha o campo com números. Tente Novamente!')
+            else:
+                sg.popup('Erro!', 'Utilize apenas números. Tente Novamente!')
+                janela_main['min'].update('')
 
     # Conclusão e tela final
     if window == janela_sucesso and event == 'Cancelar':
