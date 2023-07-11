@@ -43,20 +43,16 @@ class aplication():  # Classe principal
 
     def main(self):  # Função da tela principal
 
-        def verificador():  # função interna de vereficador de entrada
+        def verificador():  # função interna de verificador de entrada
             valor = str(minutos.get()).strip()
             if valor.isnumeric():
                 # sair(valor)
                 sucesso(valor)
             else:
                 if valor == '':
-                    erro_vasio.place(relx=0.5, y=175, anchor='center')
-                    erro_letra.place_forget()
-                    cancel.place_forget()
+                    erro.configure(text='Por favor, preencha o campo acima!')
                 else:
-                    erro_letra.place(relx=0.5, y=175, anchor='center')
-                    erro_vasio.place_forget()
-                    cancel.place_forget()
+                    erro.configure(text='Por favor, insira apenas números')
 
         def sucesso(num):  # função interna da tela de sucesso
 
@@ -79,7 +75,7 @@ class aplication():  # Classe principal
             subtitulo_sucesso.place(relx=0.5, y=90, anchor="center")
 
             # Checkbox
-            check = CTk.CTkCheckBox(sucesso_frame, text='Bloquear o usuário ao sair')
+            check = CTk.CTkCheckBox(sucesso_frame, text='Bloquear o usuário ao sair', font=('arial', 18))
             check.place(relx=0.5, y=140, anchor="center")
 
             # Botão de finalizar
@@ -103,10 +99,7 @@ class aplication():  # Classe principal
                 cancelar()
                 inicial_frame.pack()
                 sucesso_frame.pack_forget()
-                minutos.configure(placeholder_text=" ")
-                cancel.place(relx=0.5, y=175, anchor='center')
-                erro_vasio.place_forget()
-                erro_letra.place_forget()
+                erro.configure(text='Operação cancelada pelo usuário', text_color=('#E0B501', 'yellow'))
 
         # Whidgets da tela principal
 
@@ -124,34 +117,17 @@ class aplication():  # Classe principal
         subtitulo.place(x=15, y=70)
 
         # Caixa de Entrada
-        minutos = CTk.CTkEntry(inicial_frame, placeholder_text='Ex:20', width=300)
+        minutos = CTk.CTkEntry(inicial_frame, placeholder_text='Ex:20', width=300, height=35)
         minutos.place(x=50, y=130)
 
-        # Mensagem de erro 1
-        erro_vasio = CTk.CTkLabel(inicial_frame, text='Por favor, preencha o campo acima!', text_color='#FA4E4B',
-                                  font=('arial black', 15))
-        erro_vasio.pack_forget()
-
-        # Mensagem de erro 2
-        erro_letra = CTk.CTkLabel(inicial_frame, text='Por favor, insira apenas números!', text_color='#FA4E4B',
-                                  font=('arial black', 15))
-        erro_letra.pack_forget()
-
-        # Mensagem de cancelamento
-        cancel = CTk.CTkLabel(inicial_frame, text='Operação cancelada pelo usuário', text_color=('#E0B501', 'yellow'), font=('arial black', 15))
-        cancel.place_forget()
+        # Mensagens de erro
+        erro = CTk.CTkLabel(inicial_frame, text=' ', text_color='#FA4E4B', font=('arial black', 15))
+        erro.place(relx=0.5, y=255, anchor='center')
 
         # Botão de iniciar
         bt_iniciar = CTk.CTkButton(inicial_frame, text='Iniciar', fg_color='#02AD30', width=300, hover_color='#006613',
-                                   command=lambda: verificador(), font=('arial black', 15))
+                                   command=lambda: verificador(), font=('arial black', 15), corner_radius=30)
         bt_iniciar.place(relx=0.5, y=205, anchor='center')
-
-        # Botão de Sair do programa
-        lb_sair = CTk.CTkLabel(inicial_frame, text='Sair do programa')
-        lb_sair.place(x=200, y=250)
-        bt_sair = CTk.CTkButton(inicial_frame, text='Sair', command=lambda: quit(), width=50,
-                                font=('arial black', 15))
-        bt_sair.place(x=300, y=250)
 
 
 cancelar()
