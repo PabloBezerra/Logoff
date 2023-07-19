@@ -1,7 +1,7 @@
 # Importações
+
 import customtkinter as CTk
 import os
-
 
 # FUNÇÕES DE SISTEMA
 
@@ -36,23 +36,22 @@ class aplication():  # Classe principal
         janela.title('Logoff')
         janela.geometry('400x300')
         janela.resizable(False, False)
-        janela.iconbitmap('logo_Logoff.ico')
 
     def tema(self):  # Função de configuração de tema
-        CTk.set_appearance_mode('system')
+        CTk.set_appearance_mode('dark')
 
     def main(self):  # Função da tela principal
 
         def verificador():  # função interna de verificador de entrada
             valor = str(minutos.get()).strip()
             if valor.isnumeric():
-                # sair(valor)
+                sair(valor)
                 sucesso(valor)
             else:
                 if valor == '':
-                    erro.configure(text='Por favor, preencha o campo acima!')
+                    erro.configure(text='Por favor, preencha o campo acima!', text_color='#FA4E4B')
                 else:
-                    erro.configure(text='Por favor, insira apenas números')
+                    erro.configure(text='Por favor, insira apenas números', text_color='#FA4E4B')
 
         def modo(x):  # Função interna para a mudança de modo
             if escolha.get() == 'Reiniciar':
@@ -76,26 +75,25 @@ class aplication():  # Classe principal
             sucesso_frame.pack()
 
             # Título
-            titulo_sucesso = CTk.CTkLabel(sucesso_frame, text='Sucesso!', text_color='green', font=('arial black', 30))
+            titulo_sucesso = CTk.CTkLabel(sucesso_frame, text='SUCESSO!', text_color='green', font=('Segoe UI', 30,'bold'))
             titulo_sucesso.place(relx=0.5, y=30, anchor="center")
 
             # Subtítulo
-            subtitulo_sucesso = CTk.CTkLabel(sucesso_frame, text=f'Seu Pc será {variaveis[1]} em {num} minutos.\n\nAté mais!',
-                                             font=('arial', 20))
-            subtitulo_sucesso.place(relx=0.5, y=110, anchor="center")
+            subtitulo_sucesso = CTk.CTkLabel(sucesso_frame, text=f'Seu Pc será {variaveis[1]}\nem {num} minutos. Até mais!',
+                                             font=('Segoe UI', 25))
+            subtitulo_sucesso.place(relx=0.5, y=100, anchor="center")
 
             # Checkbox
-            check = CTk.CTkCheckBox(sucesso_frame, text='Bloquear o usuário ao sair', font=('arial', 18))
+            check = CTk.CTkCheckBox(sucesso_frame, text='Bloquear o usuário ao sair', font=('Segoe UI', 18,'bold'))
             check.place(relx=0.5, y=180, anchor="center")
 
             # Botão de finalizar
-            bt_finalizar = CTk.CTkButton(sucesso_frame, text='Até mais', width=150, fg_color='lightgreen', hover_color='darkgreen',
-                                         command=lambda: finalizar(), font=('arial black', 15))
+            bt_finalizar = CTk.CTkButton(sucesso_frame, text='Até mais', width=150, command=lambda: finalizar(), font=('Segoe UI', 15,'bold'))
             bt_finalizar.place(x=100, y=240, anchor='center')
 
             # Botão de cancelar operação
-            bt_cancelar = CTk.CTkButton(sucesso_frame, text='Cancelar', width=150, fg_color='lightred', hover_color='darkred',
-                                        command=lambda: voltar(), font=('arial black', 15))
+            bt_cancelar = CTk.CTkButton(sucesso_frame, text='Cancelar', width=150, fg_color='#474747', hover_color='#171717',
+                                        command=lambda: voltar(), font=('Segoe UI', 15,'bold'))
             bt_cancelar.place(x=300, y=240, anchor='center')
 
             def finalizar():  # Função interna para finalizar a operação bloqueando o sistema ou não
@@ -118,16 +116,16 @@ class aplication():  # Classe principal
         inicial_frame.pack()
 
         # Título
-        titulo = CTk.CTkLabel(inicial_frame, text='Sair do Windows', font=('arial black', 30))
-        titulo.place(x=70, y=10)
+        titulo = CTk.CTkLabel(inicial_frame, text='SAIR DO WINDOWS', text_color=('#1F6AA5'), font=('Segoe UI', 30,'bold'))
+        titulo.place(relx=0.5, y=30, anchor='center')
 
         # Subtítulo
         subtitulo = CTk.CTkLabel(inicial_frame, text='Em quantos minutos deseja\nDesligar o Pc?',
-                                 font=('arial', 20))
+                                 font=('arial', 25))
         subtitulo.place(relx=0.5, y=90, anchor='center')
 
         # Escolha
-        escolha = CTk.CTkOptionMenu(inicial_frame, values=['Desligar', 'Reiniciar'], command=modo)
+        escolha = CTk.CTkOptionMenu(inicial_frame, values=['Desligar', 'Reiniciar'], font=('Segoe UI', 15), command=modo)
         escolha.place(x=280, y=145, anchor='center')
 
         # Caixa de Entrada
@@ -135,14 +133,15 @@ class aplication():  # Classe principal
         minutos.place(x=50, y=175)
 
         # Botão de iniciar
-        bt_iniciar = CTk.CTkButton(inicial_frame, text='Iniciar', fg_color='#02AD30', width=300, hover_color='#006613',
-                                   command=lambda: verificador(), font=('arial black', 15), corner_radius=30)
+        bt_iniciar = CTk.CTkButton(inicial_frame, text='Iniciar', width=300,
+                                   command=lambda: verificador(), font=('Segoe UI', 15,'bold'), corner_radius=30)
         bt_iniciar.place(relx=0.5, y=240, anchor='center')
 
         # Mensagens de erro
-        erro = CTk.CTkLabel(inicial_frame, text=' ', text_color='#FA4E4B', font=('arial black', 15))
+        erro = CTk.CTkLabel(inicial_frame, text=' ', text_color='#FA4E4B', font=('Segoe UI', 15,'bold'))
         erro.place(relx=0.5, y=273, anchor='center')
 
+# INICIANDO O PROGRAMA
 
 variaveis = ['s', 'Desligado']
 cancelar()
