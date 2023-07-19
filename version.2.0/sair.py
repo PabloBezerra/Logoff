@@ -46,7 +46,7 @@ class aplication():  # Classe principal
         def verificador():  # função interna de verificador de entrada
             valor = str(minutos.get()).strip()
             if valor.isnumeric():
-                sair(valor)
+                # sair(valor)
                 sucesso(valor)
             else:
                 if valor == '':
@@ -80,23 +80,23 @@ class aplication():  # Classe principal
             titulo_sucesso.place(relx=0.5, y=30, anchor="center")
 
             # Subtítulo
-            subtitulo_sucesso = CTk.CTkLabel(sucesso_frame, text=f'Seu Pc será {variaveis[1]} em {num} minutos.\nAté mais!',
+            subtitulo_sucesso = CTk.CTkLabel(sucesso_frame, text=f'Seu Pc será {variaveis[1]} em {num} minutos.\n\nAté mais!',
                                              font=('arial', 20))
-            subtitulo_sucesso.place(relx=0.5, y=90, anchor="center")
+            subtitulo_sucesso.place(relx=0.5, y=110, anchor="center")
 
             # Checkbox
             check = CTk.CTkCheckBox(sucesso_frame, text='Bloquear o usuário ao sair', font=('arial', 18))
-            check.place(relx=0.5, y=140, anchor="center")
+            check.place(relx=0.5, y=180, anchor="center")
 
             # Botão de finalizar
-            bt_finalizar = CTk.CTkButton(sucesso_frame, text='Até mais', width=100, hover_color='darkgreen',
+            bt_finalizar = CTk.CTkButton(sucesso_frame, text='Até mais', width=150, fg_color='lightgreen', hover_color='darkgreen',
                                          command=lambda: finalizar(), font=('arial black', 15))
-            bt_finalizar.place(x=146, y=180)
+            bt_finalizar.place(x=100, y=240, anchor='center')
 
             # Botão de cancelar operação
-            bt_cancelar = CTk.CTkButton(sucesso_frame, text='Cancelar', width=100, hover_color='darkred',
+            bt_cancelar = CTk.CTkButton(sucesso_frame, text='Cancelar', width=150, fg_color='lightred', hover_color='darkred',
                                         command=lambda: voltar(), font=('arial black', 15))
-            bt_cancelar.place(x=146, y=220)
+            bt_cancelar.place(x=300, y=240, anchor='center')
 
             def finalizar():  # Função interna para finalizar a operação bloqueando o sistema ou não
                 if check.get() == 1:
