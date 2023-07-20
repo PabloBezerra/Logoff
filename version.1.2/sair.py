@@ -3,24 +3,6 @@ import os
 import PySimpleGUI as sg
 # from time import sleep #
 
-# Tema
-sg.theme('DarkBlue17')
-
-# Variáveis
-arquivo = 'log.txt'
-
-# Verificação e criação de arquivo
-if not os.path.exists(arquivo):
-    with open(arquivo, 'w') as f:
-        f.write('')
-
-# Mudança de variável
-with open(arquivo, 'r') as r:
-    if r.readline() == 'Ativado':
-        checado = True
-    else:
-        checado = False
-
 
 # Funções de sistema
 def sair(num):  # comando de encerramento do windows
@@ -59,9 +41,18 @@ def principal():  # janela de apresentação
         [sg.Text('Em quantos minutos deseja desligar o Pc?', key='subtitulo')],
         [sg.Input(key='min')],
         [sg.Button('Iniciar')],
-        [sg.Button('Cancelar')]
+        [sg.Button('Sair')]
     ]
     return sg.Window('Sair do Windows', layout=layout, finalize=True, return_keyboard_events=True)
+
+
+def erro():  # janela de erro de imput
+    layout = [
+        [sg.Text('ERRO!', font='verdana 20', text_color='red', key='titulo')],
+        [sg.Text('', key='tipo')],
+        [sg.Button('Ok')]
+    ]
+    return sg.Window('Aviso', layout=layout, finalize=True, return_keyboard_events=True)
 
 
 def sucesso(num):  # janela de encerramento
@@ -75,17 +66,37 @@ def sucesso(num):  # janela de encerramento
     return sg.Window('Sucesso!!!', layout=layout, finalize=True, return_keyboard_events=True)
 
 
-# Loop Principal
-janela1, janela2 = principal(), None
+# Tema
+sg.theme('DarkBlue17')
 
+# Variáveis
+arquivo = 'log.txt'
+janela_main = principal()
+janela_aviso = None
+janela_sucesso = None
+
+# Verificação e criação de arquivo
+if not os.path.exists(arquivo):
+    with open(arquivo, 'w') as f:
+        f.write('')
+
+# Mudança de variável
+with open(arquivo, 'r') as r:
+    if r.readline() == 'Ativado':
+        checado = True
+    else:
+        checado = False
+
+
+# Loop Principal
 while True:
     window, event, values = sg.read_all_windows()
 
-    # Fechamento da janela e do aplicativo
-    if window == janela2 and event == sg.WIN_CLOSED or window == janela1 and event == sg.WIN_CLOSED or window == janela1 and event == 'Cancelar':
+    # Fechamento de janelas e do aplicativo
+    if window == janela_sucesso and event == sg.WIN_CLOSED or window == janela_main and event == sg.WIN_CLOSED or window == janela_main and event == 'Sair':
         break
-    if window == janela2 and event == 'Até mais!' or window == janela2 and event == "\r":
-        if window == janela2 and values['check'] == True:
+    if window == janela_sucesso and event == 'Até mais!' or window == janela_sucesso and event == "\r":
+        if window == janela_sucesso and values['check'] == True:
             bloquear()
             with open(arquivo, 'w') as f:
                 f.write('Ativado')
@@ -93,27 +104,37 @@ while True:
             with open(arquivo, 'w') as f:
                 f.write('Desativado')
         break
+    if window == janela_aviso and event == sg.WIN_CLOSED or window == janela_aviso and event == 'Ok' or window == janela_aviso and event == '\r':
+        janela_main.un_hide()
+        janela_main['min'].update('')
+        janela_aviso.close()
 
     # Execução da ação principal
-    if window == janela1 and event == 'Iniciar' or window == janela1 and event == "\r":
-        minuto = values['min']
+    if window == janela_main and event == 'Iniciar' or window == janela_main and event == "\r":
+        minuto = str(values['min']).strip()
+
+        # Sucesso da operação
         if minuto.isnumeric():
             sair(minuto)
-            janela2 = sucesso(minuto)
-            janela1.hide()
+            janela_sucesso = sucesso(minuto)
+            janela_main.hide()
 
         # Verificação de erro
-        elif minuto == '':
-            sg.popup('Erro!', 'Preencha o campo com números. Tente Novamente!')
         else:
-            sg.popup('Erro!', 'Utilize apenas números. Tente Novamente!')
-            janela1['min'].update('')
+            janela_aviso = erro()
+            janela_main.hide()
+            if minuto == '':
+                janela_aviso['tipo'].update('Preencha o campo com números. Tente Novamente!')
+            else:
+                janela_aviso['tipo'].update('Utilize apenas números. Tente Novamente!')
 
-    # Conclusão e tela final
-    if window == janela2 and event == 'Cancelar':
+    # Cancelamento da operação
+    if window == janela_sucesso and event == 'Cancelar':
         cancelar()
-        janela2.hide()
-        janela1.un_hide()
-        janela1['min'].update('')
+        janela_sucesso.close()
+        janela_aviso = erro()
+        janela_aviso['titulo'].update('Cancelado!', text_color='yellow')
+        janela_aviso['tipo'].update('Operação cancelada pelo usuário')
+
 
 window.close()
