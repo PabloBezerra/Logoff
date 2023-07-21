@@ -42,7 +42,9 @@ class aplication():  # Classe principal
 
     def main(self):  # Função da tela principal
 
-        def verificador():  # função interna de verificador de entrada            
+        # FUNCINNALIDADES DA TELA PRINCIPAL
+
+        def verificador():  # função interna de tratamento de dados
             h = int(pri_quadro.cget('text'))
             m = int(sec_quadro.cget('text')[1:3])
             if h == 1 or h == 0:
@@ -66,7 +68,7 @@ class aplication():  # Classe principal
                 variaveis[0] = 's'
                 variaveis[1] = 'Desligado'
         
-        def atualizar_pri(n):
+        def atualizar_pri(n): # Função interna de funcionamento da primeira dezena
             if pri_quadro.cget("text") == '99' and sec_quadro.cget("text") == ':00' and n == 1:
                 pri_quadro.configure(text='01')
             elif pri_quadro.cget("text") == '01' and sec_quadro.cget("text") == ':00' and n == 0:
@@ -83,7 +85,7 @@ class aplication():  # Classe principal
                 else:
                     pri_quadro.configure(text=f'{num}')
 
-        def atualizar_sec(n):
+        def atualizar_sec(n): # Função interna de funcionamento da segunda dezena
             if sec_quadro.cget('text') == ':01' and pri_quadro.cget('text') == '00' and n == 0:
                 sec_quadro.configure(text=':59')
             elif sec_quadro.cget('text') == ':59' and pri_quadro.cget('text') == '00' and n == 1:
@@ -99,6 +101,8 @@ class aplication():  # Classe principal
                     sec_quadro.configure(text=f':0{num}')
                 else:
                     sec_quadro.configure(text=f':{num}')
+        
+        # TELA SECUNDÁRIA (tela de sucesso)
 
         def sucesso(h,m,hs,mn):  # função interna da tela de sucesso
 
@@ -114,12 +118,15 @@ class aplication():  # Classe principal
 
             # Título
             titulo_sucesso = CTk.CTkLabel(sucesso_frame, text='SUCESSO!', text_color='green', font=('Segoe UI', 30,'bold'))
-            titulo_sucesso.place(relx=0.5, y=30, anchor="center")
+            titulo_sucesso.place(relx=0.5, y=40, anchor="center")
+
+            # Subfundo
+            sub_fundo = CTk.CTkFrame(janela, width=350, height=250, corner_radius=20, fg_color='#212121' , bg_color='#2B2B2B')
+            sub_fundo.place(relx=0.5, y=200, anchor='center')
 
             # Subtítulo
-            subtitulo_sucesso = CTk.CTkLabel(sucesso_frame, text=f'Seu Pc será {variaveis[1]} em:\n\n{h} {hs} e {m} {mn}.\n\nAté mais!',
-                                             font=('Segoe UI', 25))
-            subtitulo_sucesso.place(relx=0.5, y=200, anchor="center")
+            subtitulo_sucesso = CTk.CTkLabel(sub_fundo, text=f'Seu Pc será {variaveis[1]} em:\n\n{h} {hs} e {m} {mn}.\n\nAté mais!', font=('Segoe UI', 25))
+            subtitulo_sucesso.place(relx=0.5, rely=0.5, anchor="center")
 
             # Checkbox
             check = CTk.CTkCheckBox(sucesso_frame, text='Bloquear o usuário ao sair', font=('Segoe UI', 18,'bold'))
@@ -130,9 +137,10 @@ class aplication():  # Classe principal
             bt_finalizar.place(x=100, rely=0.9, anchor='center')
 
             # Botão de cancelar operação
-            bt_cancelar = CTk.CTkButton(sucesso_frame, text='Cancelar', width=150, fg_color='#474747', hover_color='#171717',
-                                        command=lambda: voltar(), font=('Segoe UI', 15,'bold'))
+            bt_cancelar = CTk.CTkButton(sucesso_frame, text='Cancelar', width=150, fg_color='#474747', hover_color='#171717', command=lambda: voltar(), font=('Segoe UI', 15,'bold'))
             bt_cancelar.place(x=300, rely=0.9, anchor='center')
+
+            # FUNCIONALIDADES DA TELA SECUNDÁRIA
 
             def finalizar():  # Função interna para finalizar a operação bloqueando o sistema ou não
                 if check.get() == 1:
@@ -142,11 +150,15 @@ class aplication():  # Classe principal
                     exit()
 
             def voltar():  # Função interna para cancelar a operação
+                popup()
                 cancelar()
                 inicial_frame.pack()
                 tempo.place(relx=0.5, y=280, anchor='center')
                 sucesso_frame.pack_forget()
-                msg_erro.configure(text='Operação cancelada pelo usuário', text_color='yellow')
+                sub_fundo.place_forget()
+
+            def popup():
+                pass
 
         # TELA PRINCIPAL
 
@@ -167,7 +179,7 @@ class aplication():  # Classe principal
         escolha.place(x=280, y=145, anchor='center')
 
         # Quadro Tempo
-        tempo = CTk.CTkFrame(janela, width=390, height=200, fg_color='#212121', corner_radius=20, bg_color='#2B2B2B' )
+        tempo = CTk.CTkFrame(janela, width=350, height=200, fg_color='#212121', corner_radius=20, bg_color='#2B2B2B' )
         tempo.place(relx=0.5, y=280, anchor='center')
 
         # Primeiro quadro
