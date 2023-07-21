@@ -184,23 +184,23 @@ class aplication():  # Classe principal
 
         # Primeiro quadro
         pri_quadro = CTk.CTkLabel(tempo, text='01', font=('arial', 100))
-        pri_quadro.place(x=120, y=90, anchor='center')
+        pri_quadro.place(x=100, y=90, anchor='center')
             # botão de cima
         top_pri = CTk.CTkButton(tempo, text='🔺', fg_color='transparent', font=('arial', 20), width=30, hover=None, command=lambda: atualizar_pri(1))
-        top_pri.place(x=130, rely=0.1, anchor='center')
+        top_pri.place(x=110, rely=0.1, anchor='center')
             # botão de baixo
         down_pri = CTk.CTkButton(tempo, text='🔻', fg_color='transparent',  font=('arial', 20), width=30, hover=None, command=lambda: atualizar_pri(0))
-        down_pri.place(x=130, rely=0.9, anchor='center')
+        down_pri.place(x=110, rely=0.9, anchor='center')
 
         # Segundo quadro
         sec_quadro = CTk.CTkLabel(tempo, text=':00', font=('arial', 100))
-        sec_quadro.place(x=245, y=90, anchor='center')
+        sec_quadro.place(x=225, y=90, anchor='center')
             # botão de cima
         top_sec = CTk.CTkButton(tempo, text='🔺', fg_color='transparent',  font=('arial', 20), width=30, hover=None, command=lambda: atualizar_sec(1))
-        top_sec.place(x=260, rely=0.1, anchor='center')
+        top_sec.place(x=240, rely=0.1, anchor='center')
             # botão de baixo
         down_sec = CTk.CTkButton(tempo, text='🔻', fg_color='transparent',  font=('arial', 20), width=30, hover=None, command=lambda: atualizar_sec(0))
-        down_sec.place(x=260, rely=0.9, anchor='center')
+        down_sec.place(x=240, rely=0.9, anchor='center')
 
         # Legenda quadro
         ter_quadro = CTk.CTkLabel(tempo, text='Horas              Minutos', font=('Segoe UI', 20))
@@ -208,7 +208,7 @@ class aplication():  # Classe principal
 
         # Botão de iniciar
         bt_iniciar = CTk.CTkButton(inicial_frame, text='Iniciar', width=300, command=verificador, font=('Segoe UI', 15,'bold'), corner_radius=30)
-        bt_iniciar.place(relx=0.5, y=420, anchor='center')
+        bt_iniciar.place(relx=0.5, y=440, anchor='center')
 
         # Mensagem
         msg_erro = CTk.CTkLabel(inicial_frame, text='', font=('Segoe UI', 20), text_color='red')
