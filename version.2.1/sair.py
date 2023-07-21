@@ -43,14 +43,18 @@ class aplication():  # Classe principal
     def main(self):  # Função da tela principal
 
         def verificador():  # função interna de verificador de entrada            
-            if pri_quadro.cget("text") == '00' and sec_quadro.cget("text") == ':00':
-                msg_erro.configure(text='Por favor adicione um tempo válido')
+            h = int(pri_quadro.cget('text'))
+            m = int(sec_quadro.cget('text')[1:3])
+            if h == 1 or h == 0:
+                hs = 'Hora'
             else:
-                h = int(pri_quadro.cget('text'))
-                m = int(sec_quadro.cget('text')[1:3])
-                sair(h,m)
-                sucesso(h,m)
-
+                hs = 'Horas'
+            if m == 1 or m == 0:
+                mn = 'Minuto'
+            else:
+                mn = 'Minutos'
+            sair(h,m)
+            sucesso(h,m,hs,mn)
 
         def modo(x):  # Função interna para a mudança de modo
             if escolha.get() == 'Reiniciar':
@@ -63,7 +67,11 @@ class aplication():  # Classe principal
                 variaveis[1] = 'Desligado'
         
         def atualizar_pri(n):
-            if pri_quadro.cget("text") == '99' and n == 1:
+            if pri_quadro.cget("text") == '99' and sec_quadro.cget("text") == ':00' and n == 1:
+                pri_quadro.configure(text='01')
+            elif pri_quadro.cget("text") == '01' and sec_quadro.cget("text") == ':00' and n == 0:
+                pri_quadro.configure(text='99')
+            elif pri_quadro.cget("text") == '99' and n == 1:
                 pri_quadro.configure(text='00')
             elif pri_quadro.cget("text") == '00' and n == 0:
                 pri_quadro.configure(text='99')
@@ -76,7 +84,11 @@ class aplication():  # Classe principal
                     pri_quadro.configure(text=f'{num}')
 
         def atualizar_sec(n):
-            if sec_quadro.cget("text") == ':59' and n == 1:
+            if sec_quadro.cget('text') == ':01' and pri_quadro.cget('text') == '00' and n == 0:
+                sec_quadro.configure(text=':59')
+            elif sec_quadro.cget('text') == ':59' and pri_quadro.cget('text') == '00' and n == 1:
+                sec_quadro.configure(text=':01')
+            elif sec_quadro.cget("text") == ':59' and n == 1:
                 sec_quadro.configure(text=':00')
             elif sec_quadro.cget("text") == ':00' and n == 0:
                 sec_quadro.configure(text=':59')
@@ -88,7 +100,7 @@ class aplication():  # Classe principal
                 else:
                     sec_quadro.configure(text=f':{num}')
 
-        def sucesso(h,m):  # função interna da tela de sucesso
+        def sucesso(h,m,hs,mn):  # função interna da tela de sucesso
 
             # Encerrando a tela principal
             inicial_frame.pack_forget()
@@ -97,7 +109,7 @@ class aplication():  # Classe principal
             # Criando a tela de sucesso
 
             # Fundo
-            sucesso_frame = CTk.CTkFrame(janela, width=400, height=300)
+            sucesso_frame = CTk.CTkFrame(janela, width=400, height=500)
             sucesso_frame.pack()
 
             # Título
@@ -105,22 +117,22 @@ class aplication():  # Classe principal
             titulo_sucesso.place(relx=0.5, y=30, anchor="center")
 
             # Subtítulo
-            subtitulo_sucesso = CTk.CTkLabel(sucesso_frame, text=f'Seu Pc será {variaveis[1]}\nem {h} horas e {m} minutos.\nAté mais!',
+            subtitulo_sucesso = CTk.CTkLabel(sucesso_frame, text=f'Seu Pc será {variaveis[1]} em:\n\n{h} {hs} e {m} {mn}.\n\nAté mais!',
                                              font=('Segoe UI', 25))
-            subtitulo_sucesso.place(relx=0.5, y=100, anchor="center")
+            subtitulo_sucesso.place(relx=0.5, y=200, anchor="center")
 
             # Checkbox
             check = CTk.CTkCheckBox(sucesso_frame, text='Bloquear o usuário ao sair', font=('Segoe UI', 18,'bold'))
-            check.place(relx=0.5, y=180, anchor="center")
+            check.place(relx=0.5, y=380, anchor="center")
 
             # Botão de finalizar
             bt_finalizar = CTk.CTkButton(sucesso_frame, text='Até mais', width=150, command=lambda: finalizar(), font=('Segoe UI', 15,'bold'))
-            bt_finalizar.place(x=100, y=240, anchor='center')
+            bt_finalizar.place(x=100, rely=0.9, anchor='center')
 
             # Botão de cancelar operação
             bt_cancelar = CTk.CTkButton(sucesso_frame, text='Cancelar', width=150, fg_color='#474747', hover_color='#171717',
                                         command=lambda: voltar(), font=('Segoe UI', 15,'bold'))
-            bt_cancelar.place(x=300, y=240, anchor='center')
+            bt_cancelar.place(x=300, rely=0.9, anchor='center')
 
             def finalizar():  # Função interna para finalizar a operação bloqueando o sistema ou não
                 if check.get() == 1:
@@ -162,20 +174,20 @@ class aplication():  # Classe principal
         pri_quadro = CTk.CTkLabel(tempo, text='01', font=('arial', 100))
         pri_quadro.place(x=120, y=90, anchor='center')
             # botão de cima
-        top_pri = CTk.CTkButton(tempo, text='🔼', fg_color='transparent', font=('arial', 20), width=30, hover=None, command=lambda: atualizar_pri(1))
+        top_pri = CTk.CTkButton(tempo, text='🔺', fg_color='transparent', font=('arial', 20), width=30, hover=None, command=lambda: atualizar_pri(1))
         top_pri.place(x=130, rely=0.1, anchor='center')
             # botão de baixo
-        down_pri = CTk.CTkButton(tempo, text='🔽', fg_color='transparent',  font=('arial', 20), width=30, hover=None, command=lambda: atualizar_pri(0))
+        down_pri = CTk.CTkButton(tempo, text='🔻', fg_color='transparent',  font=('arial', 20), width=30, hover=None, command=lambda: atualizar_pri(0))
         down_pri.place(x=130, rely=0.9, anchor='center')
 
         # Segundo quadro
         sec_quadro = CTk.CTkLabel(tempo, text=':00', font=('arial', 100))
-        sec_quadro.place(x=250, y=90, anchor='center')
+        sec_quadro.place(x=245, y=90, anchor='center')
             # botão de cima
-        top_sec = CTk.CTkButton(tempo, text='🔼', fg_color='transparent',  font=('arial', 20), width=30, hover=None, command=lambda: atualizar_sec(1))
+        top_sec = CTk.CTkButton(tempo, text='🔺', fg_color='transparent',  font=('arial', 20), width=30, hover=None, command=lambda: atualizar_sec(1))
         top_sec.place(x=260, rely=0.1, anchor='center')
             # botão de baixo
-        down_sec = CTk.CTkButton(tempo, text='🔽', fg_color='transparent',  font=('arial', 20), width=30, hover=None, command=lambda: atualizar_sec(0))
+        down_sec = CTk.CTkButton(tempo, text='🔻', fg_color='transparent',  font=('arial', 20), width=30, hover=None, command=lambda: atualizar_sec(0))
         down_sec.place(x=260, rely=0.9, anchor='center')
 
         # Legenda quadro
