@@ -8,7 +8,7 @@ import os
 def sair(h,m):  # Comando de encerramento do windows
     num = (h * 60) + m
     sec = num * 60
-    os.system(f'shutdown -{variaveis[0]} -t {sec}')
+    os.system(f'shutdown /{variaveis[0]} /t {sec}')
 
 
 def cancelar():  # Comando de cancelamento de encerramento do windows
@@ -158,7 +158,7 @@ class aplication():  # Classe principal
                 sucesso_frame.pack_forget()
                 sub_fundo.place_forget()
                 inicial_frame.pack()
-                tempo.place(relx=0.5, y=305, anchor='center')
+                tempo.place(relx=0.5, y=250, anchor='center')
 
         # TELA PRINCIPAL
 
@@ -174,13 +174,9 @@ class aplication():  # Classe principal
         subtitulo = CTk.CTkLabel(inicial_frame, text='Em quanto tempo deseja\nDesligar o Pc?', font=('arial', 25))
         subtitulo.place(relx=0.5, y=100, anchor='center')
 
-        # Escolha
-        escolha = CTk.CTkOptionMenu(inicial_frame, values=['Desligar', 'Reiniciar'], font=('Segoe UI', 15), command=modo)
-        escolha.place(x=280, y=160, anchor='center')
-
         # Quadro Tempo
         tempo = CTk.CTkFrame(janela, width=350, height=200, fg_color='#212121', corner_radius=20, bg_color='#2B2B2B' )
-        tempo.place(relx=0.5, y=305, anchor='center')
+        tempo.place(relx=0.5, y=250, anchor='center')
 
         # Primeiro quadro
         pri_quadro = CTk.CTkLabel(tempo, text='01', font=('arial', 100))
@@ -205,9 +201,13 @@ class aplication():  # Classe principal
         # Legenda quadro
         ter_quadro = CTk.CTkLabel(tempo, text='Horas              Minutos', font=('Segoe UI', 20))
         ter_quadro.place(relx=0.5, y=150, anchor='center')
+        
+        # Escolha
+        escolha = CTk.CTkOptionMenu(inicial_frame, values=['Desligar', 'Reiniciar'], font=('Segoe UI', 15), command=modo)
+        escolha.place(x=270, y=392, anchor='center')
 
         # Botão de iniciar
-        bt_iniciar = CTk.CTkButton(inicial_frame, text='Iniciar', width=300, command=verificador, font=('Segoe UI', 15,'bold'), corner_radius=30)
+        bt_iniciar = CTk.CTkButton(inicial_frame, text='Iniciar', width=290, command=verificador, font=('Segoe UI', 15,'bold'), corner_radius=30)
         bt_iniciar.place(relx=0.5, y=450, anchor='center')
 
 
