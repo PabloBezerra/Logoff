@@ -5,10 +5,10 @@ block_cipher = None
 
 
 a = Analysis(
-    ['version.2.0\\sair.py'],
+    ['version.2.1\\sair.py'],
     pathex=[],
     binaries=[],
-    datas=[('version.2.0\\logo_Logoff.ico', '.')],
+    datas=[],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -41,5 +41,4 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['version.2.0\\logo_Logoff.ico'],
 )
