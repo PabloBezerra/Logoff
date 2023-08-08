@@ -91,7 +91,7 @@ font-size: 30px</string>
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="../../../../AppData/Local/Programs/Python/Python311/Lib/site-packages/qt6_applications/Qt/bin/icons.qrc">:/icons/Downloads/icons8-atenção-96.png</pixmap>
+      <pixmap resource="icones.qrc">:/icones/icons8-atenção-96.png</pixmap>
      </property>
     </widget>
     <widget class="QLabel" name="cancelar_1">
@@ -136,7 +136,7 @@ font-size:15px;</string>
   </widget>
  </widget>
  <resources>
-  <include location="../../../../AppData/Local/Programs/Python/Python311/Lib/site-packages/qt6_applications/Qt/bin/icons.qrc"/>
+  <include location="icones.qrc"/>
  </resources>
  <connections/>
 </ui>

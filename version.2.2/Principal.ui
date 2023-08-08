@@ -347,7 +347,7 @@ font-size:15px;</string>
   </widget>
  </widget>
  <resources>
-  <include location="../../../../AppData/Local/Programs/Python/Python311/Lib/site-packages/qt6_applications/Qt/bin/icons.qrc"/>
+  <include location="../../../../../AppData/Local/Programs/Python/Python311/Lib/site-packages/qt6_applications/Qt/bin/icons.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="icones">
+    <file>icons8-atenção-96.png</file>
+    <file>icons8-verificado-96.png</file>
+  </qresource>
+</RCC>

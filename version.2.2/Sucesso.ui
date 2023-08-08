@@ -91,16 +91,16 @@ font-size: 30px</string>
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="../../../../AppData/Local/Programs/Python/Python311/Lib/site-packages/qt6_applications/Qt/bin/icons.qrc">:/icons/Downloads/icons8-verificado-96.png</pixmap>
+      <pixmap resource="../../../../../AppData/Local/Programs/Python/Python311/Lib/site-packages/qt6_applications/Qt/bin/icons.qrc">:/icon/Documents/Programacao/MeusProjetos/logoff/version.2.2/icons8-verificado-96.png</pixmap>
      </property>
     </widget>
-    <widget class="QLabel" name="informacao">
+    <widget class="QLabel" name="informacao_1">
      <property name="geometry">
       <rect>
        <x>60</x>
-       <y>260</y>
-       <width>291</width>
-       <height>121</height>
+       <y>250</y>
+       <width>301</width>
+       <height>41</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -109,7 +109,7 @@ font-size: 25px;
 </string>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Seu pc será desligado em:&lt;br/&gt;1 Hora e 0 Minutos.&lt;br/&gt;Até mais!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Seu pc será desligado em:&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -175,12 +175,53 @@ border-radius: 10px;
       <string>Cancelar</string>
      </property>
     </widget>
+    <widget class="QLabel" name="informacao_2">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>330</y>
+       <width>281</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: white;
+font-size: 25px;
+</string>
+     </property>
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Até mais!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="informacao_h">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>290</y>
+       <width>281</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: white;
+font-size: 25px;
+</string>
+     </property>
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;00 : 00 : 00&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
    </widget>
   </widget>
  </widget>
  <resources>
-  <include location="../../../../AppData/Local/Programs/Python/Python311/Lib/site-packages/qt6_applications/Qt/bin/icons.qrc"/>
-  <include location="../../../../AppData/Local/Programs/Python/Python311/Lib/AppData/Local/Programs/Python/Python311/Lib/site-packages/qt6_applications/Qt/bin/icons.qrc"/>
+  <include location="../../../../../AppData/Local/Programs/Python/Python311/Lib/site-packages/qt6_applications/Qt/bin/icons.qrc"/>
  </resources>
  <connections/>
 </ui>
