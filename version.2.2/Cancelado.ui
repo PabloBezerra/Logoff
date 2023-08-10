@@ -82,6 +82,9 @@ font-size: 30px</string>
        <height>101</height>
       </rect>
      </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(36, 147, 58);
 font-weight: bold;
@@ -91,7 +94,10 @@ font-size: 30px</string>
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="icones.qrc">:/icones/icons8-atenção-96.png</pixmap>
+      <pixmap>:/icones/icons8-atenção-96.png</pixmap>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
     <widget class="QLabel" name="cancelar_1">

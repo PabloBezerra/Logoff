@@ -1,6 +1,6 @@
 # IMPORTAÇÕES
 
-from PyQt6 import uic, QtWidgets
+from PyQt6 import uic, QtWidgets, QtGui
 import os
 from time import sleep
 
@@ -9,7 +9,7 @@ from time import sleep
 def sair(h,m):  # Comando de encerramento do windows
     num = (h * 60) + m
     sec = num * 60
-    os.system(f'shutdown /{variaveis[0]} /t {sec}')
+    os.system(f'shutdown /{sigla} /t {sec}')
 
 
 def cancelar():  # Comando de cancelamento de encerramento do windows
@@ -53,12 +53,13 @@ def atualizar_sec(n): # Função interna de funcionamento da segunda dezena
 
 
 def inicializador():  # função interna de tratamento e distribuição de dados
+    global sigla, condicao
     if janela1.modo.currentText() == 'Desligar':
-        variaveis[0] = 's'
-        variaveis[1] = 'Desligado'
+        sigla = 's'
+        condicao = 'Desligado'
     else:
-        variaveis[0] = 'r'
-        variaveis[1] = 'Reiniciado'
+        sigla = 'r'
+        condicao = 'Reiniciado'
 
     h = int(janela1.quadro_pri.text())
     m = int(janela1.quadro_sec.text())
@@ -68,13 +69,16 @@ def inicializador():  # função interna de tratamento e distribuição de dados
 
 
 def sucesso(h, m):  # função interna da tela de sucesso e do timer de contagem regressiva
+    global rodando
+    rodando = True
     janela1.close()
     janela2.show()
-    janela2.informacao_1.setText(f'Seu Pc será {variaveis[1]} em:')
+    janela2.informacao_1.setText(f'Seu Pc será {condicao} em:')
+    janela2.verificado.setPixmap(QtGui.QPixmap('verificado.png'))
     s = 00
     hs = h
     mn = m
-    while True:
+    while rodando:
         if s <= 0:
             mn -= 1
             s = 59
@@ -89,17 +93,22 @@ def sucesso(h, m):  # função interna da tela de sucesso e do timer de contagem
 
 
 def cancelamento():  # função interna de cancelamento da operação
+    global rodando 
+    rodando = False
     janela2.close()
     janela3.show()
+    janela3.cancelar_4.setPixmap(QtGui.QPixmap('cancelado.png'))
     cancelar()
     
 
 def ok():  # função interna de retorno a tela principal
     janela3.close()
     janela1.show()
-
+    
 
 def finalizador():  # função interna de encerramento do programa e bloqueio do usuário caso requerido
+    global rodando
+    rodando = False
     if janela2.check.isChecked():
         bloquear()
     janela2.close()
@@ -108,7 +117,9 @@ def finalizador():  # função interna de encerramento do programa e bloqueio do
 
 # VARIAVEIS
 
-variaveis = ['s', 'Desligado']
+sigla = 's'
+condicao = 'Desligado'
+rodando = True
 
 # INICIANDO O SITEMA
 
@@ -120,8 +131,11 @@ janela3 = uic.loadUi('Cancelado.ui')
 
 # Configurando janelas
 janela1.show()
+janela1.setFixedSize(400,500)
 janela2.close()
+janela2.setFixedSize(400,500)
 janela3.close()
+janela3.setFixedSize(400,500)
 
 # Configurando botões da primeira principal
 janela1.up_pri.clicked.connect(lambda: atualizar_pri(1))
