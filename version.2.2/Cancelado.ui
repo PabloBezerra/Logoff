@@ -141,8 +141,6 @@ font-size:15px;</string>
    </widget>
   </widget>
  </widget>
- <resources>
-  <include location="icones.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

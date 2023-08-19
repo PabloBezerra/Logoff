@@ -91,7 +91,7 @@ font-size: 30px</string>
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="../../../../../AppData/Local/Programs/Python/Python311/Lib/site-packages/qt6_applications/Qt/bin/icons.qrc">:/icon/Documents/Programacao/MeusProjetos/logoff/version.2.2/icons8-verificado-96.png</pixmap>
+      <pixmap>:/icon/Documents/Programacao/MeusProjetos/logoff/version.2.2/icons8-verificado-96.png</pixmap>
      </property>
     </widget>
     <widget class="QLabel" name="informacao_1">

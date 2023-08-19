@@ -125,6 +125,7 @@ rodando = True
 
 # Inicializando o programa
 app = QtWidgets.QApplication([])
+
 janela1 = uic.loadUi('Principal.ui')
 janela2 = uic.loadUi('Sucesso.ui')
 janela3 = uic.loadUi('Cancelado.ui')
