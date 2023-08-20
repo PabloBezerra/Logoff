@@ -2,9 +2,9 @@
 Este é um projeto em Python que utiliza a biblioteca PyQt6 e o Qt Designer para criar uma aplicação de agendamento de desligamento, reinicialização ou bloqueio do sistema Windows. Com esta aplicação, os usuários podem configurar o tempo em horas e minutos para executar a ação desejada.
 
 ## Interface do Aplicativo:
-![Captura de tela 2023-08-20 015820](https://github.com/PabloBezerra/logoff/assets/133273609/817df27c-b5b5-4495-9198-7913a5695f68)
-![Captura de tela 2023-08-20 015901](https://github.com/PabloBezerra/logoff/assets/133273609/f7448655-48d1-4704-b1d4-57df23c69820)
-![Captura de tela 2023-08-20 015921](https://github.com/PabloBezerra/logoff/assets/133273609/4f8fec8f-73a6-466d-948d-8b8a51430fb8)
+![Captura de tela 2023-08-20 024455](https://github.com/PabloBezerra/logoff/assets/133273609/d4433c0d-af3b-4dbf-a16f-940d44deb25a)
+![Captura de tela 2023-08-20 024523](https://github.com/PabloBezerra/logoff/assets/133273609/788edf02-8bb8-4f1f-8e6f-4089f627e257)
+![Captura de tela 2023-08-20 024541](https://github.com/PabloBezerra/logoff/assets/133273609/e6f8f91d-f191-40b9-bf4c-14b0b1cd95ad)
 
 ## Recursos
 - Configuração simples do tempo para agendamento.
