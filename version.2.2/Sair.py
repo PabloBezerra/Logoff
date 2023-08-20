@@ -139,7 +139,7 @@ janela2.setFixedSize(400,500)
 janela2.verificado.setPixmap(QtGui.QPixmap('verificado.png'))
 janela2.btn_cancelar.clicked.connect(lambda: finalizador(2))
 janela2.btn_finalizar.clicked.connect(lambda: finalizador(1))
-janela2.setWindowIcon(QtGui.QIcon('version.2.2/Sair.png'))
+janela2.setWindowIcon(QtGui.QIcon('Sair.png'))
 janela2.close()
 
 # Configurando a tela de cancelamento
