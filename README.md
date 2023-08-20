@@ -21,7 +21,7 @@ Este é um projeto em Python que utiliza a biblioteca PyQt6 e o Qt Designer para
 ## Como Usar
 - Clone este repositório para o seu sistema local usando o seguinte link:
   https://github.com/PabloBezerra/logoff.git
-- Navegue até o diretório do projeto versão 2.2 a mais atual
+- Navegue até o diretório do projeto versão 2.2 a mais atual mais expecificamente `version.2.2.rar`
 - Execute o aplicativo: `Sair.exe`
 - Na interface do aplicativo, configure o tempo desejado e a ação a ser realizada.
 - Clique no botão "Inicar" para agendar a ação.
