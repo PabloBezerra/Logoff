@@ -84,7 +84,7 @@ def sucesso(h, m):  # função interna da tela de sucesso e do timer de contagem
         janela2.check.setChecked(True)
     else:
         janela2.check.setChecked(False)
-    s = 00
+    s = 1
     hs = h
     mn = m
     while rodando:
@@ -99,6 +99,8 @@ def sucesso(h, m):  # função interna da tela de sucesso e do timer de contagem
         janela2.informacao_h.setText(f'{hs:02d} : {mn:02d} : {s:02d}')
         QtWidgets.QApplication.processEvents()
         sleep(1)  
+        if s == 00 and hs == 00 and mn == 00:
+            break
 
 
 def finalizador(n):  # função interna de fechamento de janelas, encerramento do programa e bloqueio do usuário caso requerido
