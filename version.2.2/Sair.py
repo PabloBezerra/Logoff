@@ -106,18 +106,19 @@ def sucesso(h, m):  # função interna da tela de sucesso e do timer de contagem
 def finalizador(n):  # função interna de fechamento de janelas, encerramento do programa e bloqueio do usuário caso requerido
     global rodando
     rodando = False
-    if n == 1:
-        if janela2.check.isChecked():
-            bloquear()
-        janela2.close()
-        exit()
-    elif n == 2:
-        janela2.close()
-        janela3.show()
-        cancelar()
-    else:
-        janela3.close()
-        janela1.show()
+    match n:
+        case 1:
+            if janela2.check.isChecked():
+                bloquear()
+            janela2.close()
+            exit()
+        case 2:
+            janela2.close()
+            janela3.show()
+            cancelar()
+        case 3:
+            janela3.close()
+            janela1.show()
 
 # INICIANDO O SITEMA
 
